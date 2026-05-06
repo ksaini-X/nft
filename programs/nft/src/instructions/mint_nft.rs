@@ -1,8 +1,11 @@
 use anchor_lang::{prelude::*, system_program::{self, Transfer}};
 use anchor_spl::{
-    associated_token::AssociatedToken, metadata::{CreateMetadataAccountsV3, Metadata, create_metadata_accounts_v3, mpl_token_metadata::{instructions::CreateMetadataAccountV3, types::{Data, DataV2}}}, token_2022::{MintTo, spl_token_2022::instruction::mint_to}, token_interface::{self, Mint, TokenAccount, TokenInterface}
+    associated_token::AssociatedToken, metadata::{CreateMetadataAccountsV3, 
+        Metadata, create_metadata_accounts_v3, 
+        mpl_token_metadata::{types::{ DataV2}}}, token_2022::{MintTo }, 
+        token_interface::{self, Mint, TokenAccount, TokenInterface}
 };
-use crate::{error::NFTMintError, state::{Config, Whitelist}, whitelist,};
+use crate::{error::NFTMintError, state::{Config, Whitelist}};
 
 #[derive(Accounts)]
 pub struct MintNFT<'info> {
@@ -122,7 +125,7 @@ pub fn handler(
         false, 
         None)?;
 
-        ctx.accounts.whitelist.reload();
+        ctx.accounts.whitelist.reload()?;
 
         let whitelist = &mut ctx.accounts.whitelist;
 

@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 
 #[account]
-#[derive(InitSpace)]
+#[derive(InitSpace, Debug)]
 pub struct Config {
     /// Admin Pubkey, handles the config(singleton)
     pub authority: Pubkey,
@@ -22,7 +22,7 @@ impl Config {
 }
 
 #[account]
-#[derive(InitSpace)]
+#[derive(InitSpace, Debug)]
 pub struct Whitelist {
     pub user: Pubkey,
     pub has_minted: bool,
